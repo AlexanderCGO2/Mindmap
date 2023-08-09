@@ -12,8 +12,8 @@ import graphviz
 from dataclasses import dataclass, asdict
 from textwrap import dedent
 from streamlit_agraph import agraph, Node, Edge, Config
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 
 # set title of page (will be seen in tab) and the width
 st.set_page_config(page_title="AI Mind Maps", layout="wide")
@@ -23,7 +23,7 @@ COLOR = "cyan"
 FOCUS_COLOR = "red"
 
 # openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key = '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'
+openai.api_key = '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'
 
 @dataclass
 class Message:
@@ -308,7 +308,7 @@ class MindMap:
             args=(node,)
         )
 
-    def visualize(self, graph_type: Literal["agraph", "networkx", "graphviz"]) -> None:
+    def visualize(self, graph_type: Literal["agraph", "networkx"]) -> None:
         """Visualize the mindmap as a graph a certain way depending on the `graph_type`.
 
         Args:
@@ -355,17 +355,7 @@ class MindMap:
             pos = nx.spring_layout(graph, seed = 123)
             nx.draw(graph, pos=pos, node_color=colors, with_labels=True)
             st.pyplot(fig)
-        else: # graph_type == "graphviz":
-            graph = graphviz.Graph()
-            graph.attr(rankdir='LR')
-            for a, b in self.edges:
-                graph.edge(a, b, dir="both")
-            for n in self.nodes:
-                graph.node(n, style="filled", fillcolor=FOCUS_COLOR if n == selected else COLOR)
-            #st.graphviz_chart(graph, use_container_width=True)
-            b64 = base64.b64encode(graph.pipe(format='svg')).decode("utf-8")
-            html = f"<img style='width: 100%' src='data:image/svg+xml;base64,{b64}'/>"
-            st.write(html, unsafe_allow_html=True)
+        
         # sort alphabetically
         for node in sorted(self.nodes):
             self._add_expand_delete_buttons(node)
@@ -377,7 +367,7 @@ def main():
 
     st.sidebar.title("AI Mind Map Generator by AIAppCompany")
 
-    graph_type = st.sidebar.radio("Type of graph", options=["agraph", "networkx", "graphviz"])
+    graph_type = st.sidebar.radio("Type of graph", options=["agraph", "networkx"])
     
     empty = mindmap.is_empty()
     reset = empty or st.sidebar.checkbox("Reset mind map", value=False)
