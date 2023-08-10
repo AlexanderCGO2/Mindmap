@@ -23,7 +23,7 @@ COLOR = "cyan"
 FOCUS_COLOR = "red"
 
 # openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key = 
+openai.api_key = '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'
 
 @dataclass
 class Message:
