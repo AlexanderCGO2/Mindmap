@@ -12,8 +12,8 @@ import graphviz
 from dataclasses import dataclass, asdict
 from textwrap import dedent
 from streamlit_agraph import agraph, Node, Edge, Config
-#from dotenv import load_dotenv
-#load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 
 # set title of page (will be seen in tab) and the width
 st.set_page_config(page_title="AI Mind Maps", layout="wide")
@@ -22,8 +22,8 @@ st.set_page_config(page_title="AI Mind Maps", layout="wide")
 COLOR = "cyan"
 FOCUS_COLOR = "red"
 
-# openai.api_key = os.getenv("OPENAI_API_KEY")
-openai.api_key = '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'
+openai.api_key = os.getenv("OPENAI_API_KEY"
+
 
 @dataclass
 class Message:
