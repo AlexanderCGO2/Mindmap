@@ -22,7 +22,8 @@ st.set_page_config(page_title="AI Mind Maps", layout="wide")
 COLOR = "cyan"
 FOCUS_COLOR = "red"
 
-openai.api_key = os.getenv("OPENAI_API_KEY"
+# store your key in .env
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 @dataclass
